@@ -1,28 +1,15 @@
-﻿// CMakeProject1.cpp : Defines the entry point for the application.
-//
-
 #include "UniversalTerminal.h"
+#include "utilities.h"
+#include <cstdlib>
+#include <cstring>
 #include <cstdio>
 #include <cassert>
+#include <cstdint>
 
-#ifdef linux
-#include <unistd.h>
-#elif defined _WIN32
-#include <windows.h>
-#endif
 
-void convert(char* src, char from, char to) {
-	assert(from != '\0');
-	while (*src != '\0') {
-		if (*src == from)
-			*src = to;
-		src++;
-	}
-}
-
-void reduce(char* src, int prev = 1) {
+void reduce(char* src, int prev) {
 	if (prev == 0) return;
-	int idx1=-1, idx2=-1;
+	int idx1 = -1, idx2 = -1;
 	for (int i = 0; src[i] != '\0'; i++) {
 		if (src[i] == '/') {
 			if (idx1 == -1)
@@ -39,7 +26,7 @@ void reduce(char* src, int prev = 1) {
 		}
 		else { //no place for more than 1 .
 			src[idx1 + 1] = '.';
-			if (idx2 > idx1 + 2) 
+			if (idx2 > idx1 + 2)
 				src[idx1 + 2] = '.';
 		}
 }
@@ -60,25 +47,12 @@ void getCurrentFolder(char* cwd, int buffsize) {
 #endif
 }
 
-void execute(char* comand) {
-	printf("%s\n", comand);
-}
-
-int main()
-
-{
-	char cwd[1000];
-	char comand[1000];
-
-	while (1) {
-		getCurrentFolder(cwd, sizeof(cwd));
-		printf("%s > \n", cwd);
-		reduce(cwd);
-		printf("%s > ", cwd);
-		
-		scanf("%s", comand);
-		execute(comand);
+void convert(char* src, char from, char to) {
+	assert(from != '\0');
+	while (*src != '\0') {
+		if (*src == from)
+			*src = to;
+		src++;
 	}
-
-	return 0;
 }
+

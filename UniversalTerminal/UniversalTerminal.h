@@ -1,8 +1,8 @@
-﻿// CMakeProject1.h : Include file for standard system include files,
-// or project specific include files.
-
 #pragma once
 
-#include <iostream>
-
-// TODO: Reference additional headers your program requires here.
+#ifdef linux
+#include <unistd.h>
+#include <sys/wait.h>
+#elif defined _WIN32
+#include <windows.h>
+#endif
