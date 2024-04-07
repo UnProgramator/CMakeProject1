@@ -31,21 +31,7 @@ void reduce(char* src, int prev) {
 		}
 }
 
-void getCurrentFolder(char* cwd, int buffsize) {
-#ifdef linux
-	if (getcwd(cwd, buffsize) == nullptr) {
-		printf("Error occured");
-		exit(-1);
-	}
-#elif defined _WIN32
-	auto retval = GetCurrentDirectory(buffsize, cwd);
-	if (retval == 0) {
-		printf("Error occured");
-		exit(-1);
-	}
-	convert(cwd, '\\', '/');
-#endif
-}
+
 
 void convert(char* src, char from, char to) {
 	assert(from != '\0');

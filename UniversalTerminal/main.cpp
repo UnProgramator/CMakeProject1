@@ -4,6 +4,7 @@
 #include "UniversalTerminal.h"
 #include "execute.h"
 #include "utilities.h"
+#include "dir.h"
 #include <cstdio>
 #include <cstring>
 #include <cstdlib>
@@ -38,7 +39,7 @@ int main(int argc, char** argv, char** envp)
 
 		//printf("%s > \n", cwd);
 		reduce(cwd);
-		printf("%s > ", cwd);
+		printf(KGRN "%s" KWHT " > ",cwd);
 		
 		fgets(comand, sizeof(cwd), stdin);
 		execute(comand, envp);
